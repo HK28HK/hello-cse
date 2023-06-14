@@ -58,6 +58,9 @@
         ],
         "sail": [
             "./vendor/bin/sail up -d"
+        ],
+        "fresh": [
+            "./vendor/bin/sail artisan migrate:fresh --seed"
         ]
     },
     "extra": {
