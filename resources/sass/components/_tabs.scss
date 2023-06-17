@@ -1,0 +1,41 @@
+.tabs {
+    display: grid;
+
+    .tab-heading {
+        border: solid 1px #0003;
+        padding: 0.6rem;
+        background-color: #ccc;
+        text-align: left;
+        cursor: pointer;
+
+        &.active {
+            background-color: #0000;
+        }
+    }
+
+    .tabs__nav {
+        display: none;
+        flex-direction: column;
+        min-width: 200px;
+    }
+
+    .tabs__content {
+        display: grid;
+    }
+
+    @media (min-width: 992px) {
+        grid-template-columns: auto 1fr;
+
+        .tabs__nav {
+            display: flex;
+        }
+
+        .tabs__content {
+            padding: 1rem;
+
+            .tab-heading {
+                display: none;
+            }
+        }
+    }
+}

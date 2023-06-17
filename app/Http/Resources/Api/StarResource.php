@@ -22,6 +22,7 @@ class StarResource extends JsonResource
             'id' => $this->id,
             'firstname' => $this->firstname,
             'lastname' => $this->lastname,
+            'fullname' => $this->fullname,
             'image' => url(Storage::url($this->image_path)),
             'description' => $this->description,
         ];

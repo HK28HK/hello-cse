@@ -1,0 +1,13 @@
+.star-content {
+    padding: 0.4rem;
+
+    .star-content__image-wrapper {
+        display: flex;
+        width: 200px;
+        padding: 5px;
+        box-shadow: 5px 5px 5px #0003;
+        float: left;
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+    }
+}
