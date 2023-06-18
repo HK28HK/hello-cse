@@ -12,6 +12,11 @@ const activeTab = ref<number>(props.stars.data[0]?.id);
 </script>
 
 <template>
+    <header class="header">
+        <div class="container">
+            <h1>Profile Browser</h1>
+        </div>
+    </header>
     <div class="container">
         <div class="tabs">
             <div class="tabs__nav">
