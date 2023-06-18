@@ -4,7 +4,7 @@ export interface Props {
     isActive?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
-    isActive: false,
+    isActive: true,
 });
 </script>
 

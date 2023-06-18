@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 /**
  * @property-read int $id
@@ -40,7 +40,7 @@ class Star extends Model
     protected function fullname(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => $attributes['firstname'] . " " . $attributes['lastname'],
+            get: fn (mixed $value, array $attributes) => $attributes['firstname'].' '.$attributes['lastname'],
         );
     }
 }

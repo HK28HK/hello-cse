@@ -8,7 +8,6 @@ use Inertia\Inertia;
 
 class StarsFrontController extends Controller
 {
-
     public function index(): \Inertia\Response
     {
         return Inertia::render('Stars/Index', [

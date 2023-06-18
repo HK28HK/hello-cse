@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StarsFrontController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [StarsFrontController::class, "index"]);
+Route::get('/', [StarsFrontController::class, 'index']);
+
+Route::prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::resource('stars', AdminController::class);
+    });

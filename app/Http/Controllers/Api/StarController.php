@@ -6,14 +6,12 @@ use App\Http\Controllers\ApiBaseController;
 use App\Http\Requests\Api\StarStoreRequest;
 use App\Http\Requests\Api\StarUpdateRequest;
 use App\Http\Resources\Api\StarResource;
+use App\Http\Services\StarService;
 use App\Models\Star;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Storage;
 
 class StarController extends ApiBaseController
 {
-    protected string $storage_folder = 'public/stars';
-
     /**
      * Display a listing of the resource.
      */
@@ -31,28 +29,17 @@ class StarController extends ApiBaseController
      */
     public function store(StarStoreRequest $request): JsonResponse
     {
-        try {
-            /** @var array<string,mixed> */
-            $fields = $request->validated();
+        /** @var array<string,mixed> */
+        $fields = $request->validated();
 
-            // Upload image
-            $file = $request->file('image');
+        // Upload image
+        $file = $request->file('image');
 
-            /** 
-             * @phpstan-ignore-next-line
-             * @link https://github.com/nunomaduro/larastan/issues/250
-             */
-            $fields['image_path'] = Storage::put($this->storage_folder, $file);
+        $star = StarService::store($fields, $file);
 
-            /** @var Star|null */
-            $star = Star::create($fields);
-
-            return self::response(
-                StarResource::make($star)
-            );
-        } catch (\Exception $e) {
-            return self::error(__('Failed to create resource'));
-        }
+        return self::response(
+            StarResource::make($star)
+        );
     }
 
     /**
@@ -70,18 +57,14 @@ class StarController extends ApiBaseController
      */
     public function update(StarUpdateRequest $request, Star $star): JsonResponse
     {
-        try {
-            /** @var array<string,mixed> */
-            $fields = $request->validated();
+        /** @var array<string,mixed> */
+        $fields = $request->validated();
 
-            $star->update($fields);
+        StarService::update($star, $fields);
 
-            return self::response(
-                StarResource::make($star)
-            );
-        } catch (\Exception $e) {
-            return self::error(__('Failed to update resource'));
-        }
+        return self::response(
+            StarResource::make($star)
+        );
     }
 
     /**
@@ -89,12 +72,8 @@ class StarController extends ApiBaseController
      */
     public function destroy(Star $star): JsonResponse
     {
-        try {
-            $star->delete();
+        StarService::destroy($star);
 
-            return self::response();
-        } catch (\Exception $e) {
-            return self::error(__('Failed to destroy resource'));
-        }
+        return self::response();
     }
 }
