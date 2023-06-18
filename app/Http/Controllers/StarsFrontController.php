@@ -5,17 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Resources\Api\StarResource;
 use App\Models\Star;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class StarsFrontController extends Controller
 {
-    public function index(): \Inertia\Response
+    public function index(): Response
     {
         return Inertia::render('Stars/Index', [
             'stars' => StarResource::collection(Star::all()),
         ]);
     }
 
-    public function show(Star $star)
+    public function show(Star $star): Response
     {
         return Inertia::render('Star/Show', [
             'event' => $star->only(

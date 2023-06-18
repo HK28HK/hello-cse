@@ -10,6 +10,10 @@ class StarService
 {
     const storage_folder = 'public/stars';
 
+    /**
+     * @param array<string,mixed> $fields
+     * @param UploadedFile|UploadedFile[]|null $file
+     */
     public static function store(array $fields, UploadedFile|array|null $file): Star
     {
         /**
@@ -22,13 +26,16 @@ class StarService
         /** @var Star|null */
         $star = Star::create($fields);
 
-        if (! $star) {
+        if (!$star) {
             throw new \Exception('Failed to create resource');
         }
 
         return $star;
     }
 
+    /**
+     * @param array<string,mixed> $fields
+     */
     public static function update(Star $star, array $fields): bool
     {
         return $star->update($fields);
@@ -36,6 +43,6 @@ class StarService
 
     public static function destroy(Star $star): bool
     {
-        return $star->delete();
+        return $star->delete() ?: false;
     }
 }

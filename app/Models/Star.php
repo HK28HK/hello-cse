@@ -33,14 +33,11 @@ class Star extends Model
         'image_path',
     ];
 
-    protected $append = [
-        'fullname',
-    ];
-
+    /** @return Attribute<string,void> */
     protected function fullname(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => $attributes['firstname'].' '.$attributes['lastname'],
+            get: fn (mixed $value, mixed $attributes) => gettype($attributes) === "array" ? $attributes['firstname'] . ' ' . $attributes['lastname'] : null,
         );
     }
 }
