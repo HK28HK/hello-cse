@@ -62,6 +62,12 @@
         ],
         "fresh": [
             "./vendor/bin/sail artisan migrate:fresh --seed"
+        ],
+        "demo": [
+            "composer sail",
+            "composer fresh",
+            "./vendor/bin/sail artisan storage:link",
+            "npm run build"
         ]
     },
     "extra": {
